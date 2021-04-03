@@ -5,14 +5,7 @@
         "type": "objectscript",
         "request": "launch",
         "name": "ObjectScript Debug Class", 
-        "program": "##class(PackageSample.ObjectScript).Test()",
-      },
-      {
-        "type": "objectscript",
-        "request": "attach",
-        "name": "ObjectScript Attach",
-        "processId": "${command:PickProcess}",
-        "system": true
+        "program": "##class(RestDocumentation.ServiceDocumentation).getListRoutesXData(\"restApi.dispath\")",
       }
     ]
   }
