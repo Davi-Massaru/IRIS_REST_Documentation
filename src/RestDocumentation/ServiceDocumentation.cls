@@ -30,7 +30,7 @@ ClassMethod GetRouteResult(pNameClass As %String, pExpression As %String, Output
     Return:'(..IsExtentionOfREST(pNameClass)) 0
 
     Set UrlMap = ##class(%Dictionary.XDataDefinition).%OpenId(pNameClass_"||UrlMap").Data
-    Return:'$IsObject(UrlMap)
+    Return:'$IsObject(UrlMap) 0
 
     Set tSC = ##class(%XML.XPATH.Document).CreateFromStream(UrlMap,.tDocument) 
     Return:$$$ISERR(tSC) tSC
