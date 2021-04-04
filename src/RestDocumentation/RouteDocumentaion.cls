@@ -15,7 +15,7 @@ Property ResponseBody As %Dictionary.ClassDefinition;
 
 Property RequestBody As %Dictionary.ClassDefinition;
 
-Property TypeAplication As %String;
+Property ContentType As %String;
 
 Property ParameterQuery As list Of %String;
 

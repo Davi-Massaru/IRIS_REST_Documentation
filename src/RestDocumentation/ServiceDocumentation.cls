@@ -1,28 +1,18 @@
 Class RestDocumentation.ServiceDocumentation Extends %RegisteredObject
 {
 
-ClassMethod getListRoutesXData(pNameClass As %String) As %Status
+ClassMethod getListRoutesXData(pNameClass As %String) As %ListOfObjects
 {
     Quit:'(..IsExtentionOfREST(pNameClass))
-    
 
-    Set UrlMap = ##class(%Dictionary.XDataDefinition).%OpenId(pNameClass_"||UrlMap").Data
-    Quit:'$IsObject(UrlMap)
-
-    Set tSC = ##class(%XML.XPATH.Document).CreateFromStream(UrlMap,.tDocument)       
-    Quit:$$$ISERR(tSC) tSC
-    
-    Set context="/Routes"
-    Set expression="Route"
-    Set tSC=tDocument.EvaluateExpression(context,expression,.tResults)
-    Quit:$$$ISERR(tSC) tSC
+    Set tSC = ..GetRouteResult(pNameClass,"Route",.tResults)
+    Quit:$$$ISERR(tSC)
 
     Set routes = ..ConvertXmlResultAttributesToObjectList(tResults)
-
     Set listRouteDocumentaion = ##class(%ListOfObjects).%New()
     For indexRoute=1:1:routes.Count(){
-        Set route = routes.GetAt(indexRoute)
 
+        Set route = routes.GetAt(indexRoute)
         Set routeDocumentaion =##class(RestDocumentation.RouteDocumentaion).%New()
         Set routeDocumentaion.Url =  $PROPERTY(route, "Url")
         Set routeDocumentaion.Method = $PROPERTY(route, "Method")
@@ -33,6 +23,22 @@ ClassMethod getListRoutesXData(pNameClass As %String) As %Status
     }
 
     Return listRouteDocumentaion
+}
+
+ClassMethod GetRouteResult(pNameClass As %String, pExpression As %String, Output pResults As %ListOfObjects(CLASSNAME="%XML.XPATH.RESULT")) As %Status
+{
+    Return:'(..IsExtentionOfREST(pNameClass)) 0
+
+    Set UrlMap = ##class(%Dictionary.XDataDefinition).%OpenId(pNameClass_"||UrlMap").Data
+    Return:'$IsObject(UrlMap)
+
+    Set tSC = ##class(%XML.XPATH.Document).CreateFromStream(UrlMap,.tDocument) 
+    Return:$$$ISERR(tSC) tSC
+
+    Set tSC=tDocument.EvaluateExpression("/Routes",pExpression,.pResults)
+    Return:$$$ISERR(tSC) tSC
+
+    Return $$$OK
 }
 
 ClassMethod ConvertXmlResultAttributesToObjectList(pResults As %ListOfObjects(CLASSNAME="%XML.XPATH.RESULT")) As %ListOfObjects

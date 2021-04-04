@@ -24,6 +24,8 @@ XData UrlMap
 <Map Prefix="/api/v2*" Forward="restApi.v2.api"/>
 <Route Url="/ping/" Method="POST" Call="PingPost" Cors="true"/>
 <Route Url="/ping/" Method="GET" Call="Ping" />
+<Route Url="/ping/" Method="GET" Call="Ping" />
+<Route Url="/TesteCallByDefinition/" Method="GET" Call="restApi.v1.api:TesteCallByDefinition" />
 </Routes>
 }
 
