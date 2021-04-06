@@ -10,6 +10,7 @@ ClassMethod MethodSithoutDescription() As %Status
 }
 
 /// TesteCallByDefinition
+/// Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ClassMethod TesteCallByDefinition() As %Status
 {
     Set sc = $$$OK
@@ -39,6 +40,8 @@ XData UrlMap
 {
 <Routes>
 <Route Url="/DocumentationExample/" Method="GET" Call="DocumentationExample" />
+<Route Url="/TesteCallByDefinition/" Method="GET" Call="TesteCallByDefinition" />
+<Route Url="/MethodSithoutDescription/" Method="GET" Call="MethodSithoutDescription" />
 </Routes>
 }
 

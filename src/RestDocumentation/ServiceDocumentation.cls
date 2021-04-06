@@ -1,6 +1,31 @@
 Class RestDocumentation.ServiceDocumentation Extends %RegisteredObject
 {
 
+ClassMethod getListMapXData(pNameClass As %String) As %ListOfObjects
+{
+    Quit:'(..IsExtentionOfREST(pNameClass))
+
+    Set tSC = ..GetRouteResult(pNameClass,"Map",.tResults)
+    Quit:$$$ISERR(tSC)
+
+    Set maps = ..ConvertXmlResultAttributesToObjectList(tResults)
+
+    Set listMapDocumentaion = ##class(%ListOfObjects).%New()
+    For index=1:1:maps.Count(){
+
+        Set map = maps.GetAt(index)
+        Set mapDocumentation =##class(RestDocumentation.MapDocumentation).%New()
+        Set mapDocumentation.Prefix = $PROPERTY(map, "Prefix")
+        Set mapDocumentation.Forward = $PROPERTY(map, "Forward")
+
+        Set classCalled = ##class(%Dictionary.ClassDefinition).%OpenId(mapDocumentation.Forward)
+        Set mapDocumentation.Description = classCalled.Description
+
+        Do listMapDocumentaion.Insert(mapDocumentation)
+    }
+    Return listMapDocumentaion
+}
+
 ClassMethod getListRoutesXData(pNameClass As %String) As %ListOfObjects
 {
     Quit:'(..IsExtentionOfREST(pNameClass))
@@ -18,6 +43,13 @@ ClassMethod getListRoutesXData(pNameClass As %String) As %ListOfObjects
         Set routeDocumentaion.Method = $PROPERTY(route, "Method")
         Set routeDocumentaion.Call = $PROPERTY(route, "Call")
         Set routeDocumentaion.Cors = $PROPERTY(route, "Cors")
+
+        Set descriptionMethd = ..GetDescriptionMethd(pNameClass_"||"_routeDocumentaion.Call)
+        Set routeDocumentaion.Description = descriptionMethd.description
+        Set routeDocumentaion.ResponseBody = descriptionMethd.ResponseBody
+        Set routeDocumentaion.RequestBody  = descriptionMethd.RequestBody
+        Set routeDocumentaion.ContentType  = descriptionMethd.ContentType
+        Set routeDocumentaion.ParameterQuery = descriptionMethd.ParameterQuery
 
         Do listRouteDocumentaion.Insert(routeDocumentaion)
     }
@@ -61,7 +93,8 @@ ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As RestDocumentati
 
 ClassMethod GetAnnotationValue(pAnnotation As %String) As %String
 {
-    Set regex = ##class(%Regex.Matcher).%New("(?<=\().+?(?=\))",pAnnotation)
+    Set pAnnotation = $REPLACE(pAnnotation, $CHAR(13,10), "")
+    Set regex = ##class(%Regex.Matcher).%New("(?<=\().+?(?=\))", pAnnotation)
     Return:'(regex.Locate()) ""
     Set value = regex.Group
     Set value = $REPLACE(value, " ", "")
@@ -71,7 +104,6 @@ ClassMethod GetAnnotationValue(pAnnotation As %String) As %String
 ClassMethod ConvertXmlResultAttributesToObjectList(pResults As %ListOfObjects(CLASSNAME="%XML.XPATH.RESULT")) As %ListOfObjects
 {
     Set listOfObjects = ##class(%ListOfObjects).%New()
-    do ##class(%Regex.Matcher).%New()
     For index=1:1:pResults.Count(){
         Set result = pResults.GetAt(index)
         While result.Read(){

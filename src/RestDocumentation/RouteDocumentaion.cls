@@ -11,9 +11,9 @@ Property Cors As %String;
 
 Property Description As %String;
 
-Property ResponseBody As %Dictionary.ClassDefinition;
+Property ResponseBody As %String;
 
-Property RequestBody As %Dictionary.ClassDefinition;
+Property RequestBody As %String;
 
 Property ContentType As %String;
 
