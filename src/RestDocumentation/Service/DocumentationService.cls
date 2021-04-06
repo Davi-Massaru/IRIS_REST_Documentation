@@ -1,4 +1,4 @@
-Class RestDocumentation.ServiceDocumentation Extends %RegisteredObject
+Class RestDocumentation.Service.DocumentationService Extends %RegisteredObject
 {
 
 ClassMethod GetDocumentation(pNameClass As %String) As RestDocumentation.Model.RestDocumentation
