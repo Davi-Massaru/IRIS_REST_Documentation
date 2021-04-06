@@ -41,10 +41,37 @@ ClassMethod GetRouteResult(pNameClass As %String, pExpression As %String, Output
     Return $$$OK
 }
 
+ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As %Status
+{
+    Set descriptionMethod = ##class(RestDocumentation.descriptionMethod).%New()
+    Set methodDefinition = ##class(%Dictionary.MethodDefinition).%OpenId(pDefinitionMethod)
+
+    Set listDescription = $LISTFROMSTRING(methodDefinition.Description, "@")
+
+    For index=1:1:$LISTLENGTH(listDescription){
+        Set description = $LIST(listDescription, index)
+        Set descriptionMethod.description = descriptionMethod.description _"@"_ description
+        Set:( $FIND(description, "ResponseBody") > 0) descriptionMethod.ResponseBody = ..GetAnnotationValue(description)
+        Set:( $FIND(description, "RequestBody") > 0) descriptionMethod.RequestBody = ..GetAnnotationValue(description)
+        Set:( $FIND(description, "ContentType") > 0) descriptionMethod.ContentType = ..GetAnnotationValue(description)
+        Do:( $FIND(description, "ParameterQuery") > 0) descriptionMethod.ParameterQuery.Insert( ..GetAnnotationValue(description) )
+    }
+    Return descriptionMethod
+}
+
+ClassMethod GetAnnotationValue(pAnnotation As %String) As %String
+{
+    Set regex = ##class(%Regex.Matcher).%New("(?<=\().+?(?=\))",pAnnotation)
+    Return:'(regex.Locate()) ""
+    Set value = regex.Group
+    Set value = $REPLACE(value, " ", "")
+    Return value
+}
+
 ClassMethod ConvertXmlResultAttributesToObjectList(pResults As %ListOfObjects(CLASSNAME="%XML.XPATH.RESULT")) As %ListOfObjects
 {
     Set listOfObjects = ##class(%ListOfObjects).%New()
-
+    do ##class(%Regex.Matcher).%New()
     For index=1:1:pResults.Count(){
         Set result = pResults.GetAt(index)
         While result.Read(){
