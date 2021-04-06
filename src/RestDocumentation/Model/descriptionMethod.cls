@@ -1,4 +1,4 @@
-Class RestDocumentation.descriptionMethod Extends %RegisteredObject
+Class RestDocumentation.Model.descriptionMethod Extends %RegisteredObject
 {
 
 Property description As %String;

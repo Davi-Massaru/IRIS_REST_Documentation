@@ -1,4 +1,4 @@
-Class RestDocumentation.RouteDocumentaion Extends %RegisteredObject
+Class RestDocumentation.Model.RouteDocumentaion Extends %RegisteredObject
 {
 
 Property Url As %String;

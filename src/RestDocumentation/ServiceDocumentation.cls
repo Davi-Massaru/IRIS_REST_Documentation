@@ -14,7 +14,7 @@ ClassMethod getListMapXData(pNameClass As %String) As %ListOfObjects
     For index=1:1:maps.Count(){
 
         Set map = maps.GetAt(index)
-        Set mapDocumentation =##class(RestDocumentation.MapDocumentation).%New()
+        Set mapDocumentation =##class(RestDocumentation.Model.MapDocumentation).%New()
         Set mapDocumentation.Prefix = $PROPERTY(map, "Prefix")
         Set mapDocumentation.Forward = $PROPERTY(map, "Forward")
 
@@ -38,7 +38,7 @@ ClassMethod getListRoutesXData(pNameClass As %String) As %ListOfObjects
     For indexRoute=1:1:routes.Count(){
 
         Set route = routes.GetAt(indexRoute)
-        Set routeDocumentaion =##class(RestDocumentation.RouteDocumentaion).%New()
+        Set routeDocumentaion =##class(RestDocumentation.Model.RouteDocumentaion).%New()
         Set routeDocumentaion.Url =  $PROPERTY(route, "Url")
         Set routeDocumentaion.Method = $PROPERTY(route, "Method")
         Set routeDocumentaion.Call = $PROPERTY(route, "Call")
@@ -73,9 +73,9 @@ ClassMethod GetRouteResult(pNameClass As %String, pExpression As %String, Output
     Return $$$OK
 }
 
-ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As RestDocumentation.descriptionMethod
+ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As RestDocumentation.Model.descriptionMethod
 {
-    Set descriptionMethod = ##class(RestDocumentation.descriptionMethod).%New()
+    Set descriptionMethod = ##class(RestDocumentation.Model.descriptionMethod).%New()
     Set methodDefinition = ##class(%Dictionary.MethodDefinition).%OpenId(pDefinitionMethod)
 
     Set listDescription = $LISTFROMSTRING(methodDefinition.Description, "@")

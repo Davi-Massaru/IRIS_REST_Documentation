@@ -1,4 +1,4 @@
-Class RestDocumentation.MapDocumentation Extends %RegisteredObject
+Class RestDocumentation.Model.MapDocumentation Extends %RegisteredObject
 {
 
 Property Prefix As %String;
