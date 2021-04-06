@@ -41,7 +41,7 @@ ClassMethod GetRouteResult(pNameClass As %String, pExpression As %String, Output
     Return $$$OK
 }
 
-ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As %Status
+ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As RestDocumentation.descriptionMethod
 {
     Set descriptionMethod = ##class(RestDocumentation.descriptionMethod).%New()
     Set methodDefinition = ##class(%Dictionary.MethodDefinition).%OpenId(pDefinitionMethod)
