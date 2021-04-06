@@ -1,7 +1,18 @@
 Class RestDocumentation.ServiceDocumentation Extends %RegisteredObject
 {
 
-ClassMethod getListMapXData(pNameClass As %String) As %ListOfObjects
+ClassMethod GetDocumentation(pNameClass As %String) As RestDocumentation.Model.RestDocumentation
+{
+    Quit:'(..IsExtentionOfREST(pNameClass))
+    Set RestDocumentation = ##class(RestDocumentation.Model.RestDocumentation).%New()
+    
+    Set RestDocumentation.Maps = ..GetListMapXData(pNameClass)
+    Set RestDocumentation.Routes = ..GetListRoutesXData(pNameClass)
+
+    Return RestDocumentation
+}
+
+ClassMethod GetListMapXData(pNameClass As %String) As %ListOfObjects
 {
     Quit:'(..IsExtentionOfREST(pNameClass))
 
@@ -26,7 +37,7 @@ ClassMethod getListMapXData(pNameClass As %String) As %ListOfObjects
     Return listMapDocumentaion
 }
 
-ClassMethod getListRoutesXData(pNameClass As %String) As %ListOfObjects
+ClassMethod GetListRoutesXData(pNameClass As %String) As %ListOfObjects
 {
     Quit:'(..IsExtentionOfREST(pNameClass))
 
