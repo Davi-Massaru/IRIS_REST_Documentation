@@ -24,8 +24,8 @@ ClassMethod TesteCallByDefinition() As %Status
 /// 
 /// Annotations :
 /// 
-/// @ResponseBody(ResponseBodyRest)
-/// @RequestBody(RequestBody)
+/// @ResponseBody(restApi.Model.Sample)
+/// @RequestBody(restApi.Model.Company)
 /// @ContentType(application/json)
 /// @ParameterQuery(color,blue|green|red)
 /// @ParameterQuery(name,string)
