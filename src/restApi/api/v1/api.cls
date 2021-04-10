@@ -3,7 +3,7 @@
 Class restApi.v1.api Extends %CSP.REST
 {
 
-ClassMethod MethodSithoutDescription() As %Status
+ClassMethod MethodWithoutDescription() As %Status
 {
     Set sc = $$$OK
     Return sc
@@ -29,6 +29,7 @@ ClassMethod TesteCallByDefinition() As %Status
 /// @ContentType(application/json)
 /// @ParameterQuery(color,blue|green|red)
 /// @ParameterQuery(name,string)
+/// @ParameterQuery(company,string)
 ClassMethod DocumentationExample() As %Status
 {
     Set sc = $$$OK
@@ -39,9 +40,9 @@ ClassMethod DocumentationExample() As %Status
 XData UrlMap
 {
 <Routes>
-<Route Url="/DocumentationExample/" Method="GET" Call="DocumentationExample" />
-<Route Url="/TesteCallByDefinition/" Method="GET" Call="TesteCallByDefinition" />
-<Route Url="/MethodSithoutDescription/" Method="GET" Call="MethodSithoutDescription" />
+<Route Url="/DocumentationExample/:pParameter/show" Method="GET" Call="DocumentationExample" />
+<Route Url="/TesteCallByDefinition" Method="POST" Call="TesteCallByDefinition" />
+<Route Url="/MethodWithoutDescription" Method="CONNECT" Call="MethodWithoutDescription" />
 </Routes>
 }
 
