@@ -8,7 +8,7 @@
       "username": "_SYSTEM",
       "password": "SYS",
       "links": {
-        "RestDocumentation": "http://${host}:49160/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME="
+        "RestDocumentation": "http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME="
       },
       "docker-compose": {
         "service": "iris",

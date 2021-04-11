@@ -3,47 +3,47 @@ Class restApi.v2.api Extends %CSP.REST
 
 ClassMethod GET() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod HEAD() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod POST() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod PUT() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod DELETE() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod CONNECT() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod OPTIONS() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod TRACE() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 ClassMethod PATCH() As %Status
 {
-Return $$$ok
+    Return $$$ok
 }
 
 XData UrlMap
