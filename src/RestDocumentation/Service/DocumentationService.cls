@@ -88,9 +88,10 @@ ClassMethod GetDescriptionMethd(pDefinitionMethod As %String) As RestDocumentati
 {
     Set descriptionMethod = ##class(RestDocumentation.Model.descriptionMethod).%New()
     Set methodDefinition = ##class(%Dictionary.MethodDefinition).%OpenId(pDefinitionMethod)
-    Set descriptionMethod.description = methodDefinition.Description
 
     Set listDescription = $LISTFROMSTRING(methodDefinition.Description, "@")
+    Set:($LISTLENGTH(listDescription) > 0) descriptionMethod.description = $LIST(listDescription, 1)
+    
     For index=1:1:$LISTLENGTH(listDescription){
         Set description = $LIST(listDescription, index)
         Set:( $FIND(description, "ResponseBody") > 0) descriptionMethod.ResponseBody = ..GetAnnotationValue(description)

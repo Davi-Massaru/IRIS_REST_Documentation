@@ -32,7 +32,7 @@ ClassMethod InterpreterPropertyType(pPropertyType As %String) As %Status
 			"Binary":		##class(%PopulateUtils).String(),
 			"Double":		##class(%PopulateUtils).Float(),
 			"Name":			##class(%PopulateUtils).Name(),
-			"Boolean":		$zu(165, 1 , 2),
+			"Boolean":		"Bool("_$zu(165, 1 , 2)_")",
 			"Currency":		##class(%PopulateUtils).Currency(),
 			"Float":		##class(%PopulateUtils).Float(),
 			"Numeric":		##class(%PopulateUtils).Float(),

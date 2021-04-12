@@ -40,7 +40,7 @@ ClassMethod DocumentationExample() As %Status
 XData UrlMap
 {
 <Routes>
-<Route Url="/DocumentationExample/:pParameter/show" Method="GET" Call="DocumentationExample" />
+<Route Url="/DocumentationExample/:pParameter/show" Method="GET" Call="DocumentationExample" Cors="true" />
 <Route Url="/TesteCallByDefinition" Method="POST" Call="TesteCallByDefinition" />
 <Route Url="/MethodWithoutDescription" Method="CONNECT" Call="MethodWithoutDescription" />
 </Routes>

@@ -1,0 +1,140 @@
+
+body {
+    background-color: #F9F9F9;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    color: #000;
+}
+
+ul {
+    list-style-type: none;
+}
+
+p {
+    font-size: 14px;
+}
+
+.method-tag {
+    font-weight: bolder;
+    min-width: 110px;
+    border-radius: 5px;
+}
+
+.lighter {
+    font-weight: lighter;
+}
+
+.ellipsis {
+    max-height: 36px;
+    display: column;
+    min-width: 0px;
+}
+
+.ellipsis p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.route-name {
+    font-size: 12px;
+}
+
+.route {
+    margin-top: -10px;
+    font-size: 12px;
+}
+
+.list {
+    background-color: #fff;
+    position: relative;
+    border-radius: 5px;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.list-shadow {
+    box-shadow: rgba(24, 50, 115, 0.06) 2px 3px 16px 0px;
+}
+
+.icon-area {
+    min-width: 36px;
+    min-height: 36px;
+}
+
+.collapsed-documentation {
+    word-wrap: break-word;
+    background-color: #fff;
+    margin: -10px 5px 5px 5px;
+    position: relative;
+    border: 1px solid #eeeeee;
+    border-radius: 6px;
+    z-index: 0;
+    box-shadow: rgba(24, 50, 115, 0.06) 2px 3px 16px 0px;
+}
+
+.description {
+    text-indent: 1.25em;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.play-right-to-down {
+    animation-name: rotate-icon-right-to-down;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+.play-down-to-right {
+    animation-name: rotate-icon-down-to-right;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes rotate-icon-right-to-down {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes rotate-icon-down-to-right {
+    0% {
+        transform: rotate(90deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+pre {
+    margin: 0px;
+    padding: 10px;
+    background-color: #333333;
+    border-radius: 6px;
+    box-shadow: rgba(24, 50, 115, 0.2) 0px 0px 8px 0px;
+    color: #ffffff;
+}
+
+.string { color: #edd11a; }
+.number, .boolean, .null { font-weight: bold; color: #8671de; }
+.key { font-weight: bold; color: #41b564; }
+
+.pill {
+    font-size: 12px;
+    border-radius: 25px;
+    padding: 6px 12px 6px 12px;
+    margin: 0px 5px 0px 5px; 
+    box-shadow: rgba(24, 50, 115, 0.2) 0px 0px 8px 0px;
+}
