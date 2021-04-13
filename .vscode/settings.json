@@ -14,7 +14,7 @@
         "service": "iris",
         "internalPort": 52773
       },
-      "active": true
+      "active": false
     },
     "workbench.colorTheme": "InterSystems Default Dark"
 

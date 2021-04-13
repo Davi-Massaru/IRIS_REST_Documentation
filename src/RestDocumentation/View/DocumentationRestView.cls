@@ -16,13 +16,12 @@ ClassMethod OnPage() As %Status
                         <title>Documentation Rest</title>
             </head>
         <body>
-        <section class="col-12 col-lg-8 mx-auto px-3" >>
+        <section class="col-12 col-lg-8 mx-auto px-3">>
 
         Try {
-
             Set classname = ""
             Set:$data(%request.Data("CLASSNAME",1)) classname= %request.Data("CLASSNAME",1)
-            Write "<h1> Documentation of: ", classname, "</h1>"
+            &html< <h1 style="margin-top:32px;">Documentation of: #(classname)# </h1>>
 
             Set:(classname '= "") restDocumentation = ..GetDocumentationUrlMaps(classname)
             Do:(classname '= "") ..DrawUrlRoutes(restDocumentation)
@@ -48,16 +47,53 @@ ClassMethod OnPage() As %Status
 ClassMethod DrawUrlMaps(pRestDocumentation As RestDocumentation.Model.RestDocumentation) As %Status
 {
     Set countMaps = pRestDocumentation.Maps.Count()
-    Write:(countMaps > 0) "<br>  Maps:"
-    For i=1:1:countMaps{
-        
+    Return:(countMaps = 0) $$$OK
+    Set nameSpace = $ZCONVERT($SYSTEM.SYS.NameSpace(), "L")
+
+    &html<
+        <hr>
+        <h4>Maps:</h4>
+        <ul class="p-0">
+    >
+
+    For i=1:1:countMaps{        
         Set map = pRestDocumentation.Maps.GetAt(i)
-        Write "<br> ----------------------------------------"
-        Write:(map.Description '= "") "<br> Description: ",$REPLACE(map.Description, $CHAR(13,10), "<br>" )
-        Write:(map.Prefix '= "") "<br> Prefix: ",map.Prefix
-        Write:(map.Forward '= "") "<br> Forward: ",map.Forward
+
+        Set idList = map.Prefix_map.Forward_i
+        For char="/",":",".","*" {
+            Set idList = $REPLACE((idList), char,"")
+        }
+        
+        &html<
+            <li id="#(idList)#" class="list list-shadow" style="height: 52px;" data-bs-toggle="collapse" href="##(idList_"collapse")#" role="button" aria-expanded="false" aria-controls="collapseExample" onClick='setChevronState("#(idList)#")' >
+                <div class="w-100 h-100 d-flex">
+                    <div class="m-2 method-tag d-flex align-items-center justify-content-center">
+                        <span class="p-2">
+                            <strong style="font-size: 14px; color: #333333;"> #(map.Prefix)# </strong> 
+                        </span>
+                    </div>
+                    
+                    <div class="m-2 ellipsis"> 
+                        <p class="mt-2 align-items-center justify-content-center"> #(map.Forward)# </p> 
+                    </div>
+
+                    <div class="m-2 ms-auto icon-area d-flex align-items-center justify-content-center">
+                        <svg width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </div>
+                </div>
+            </li>
+
+            <div class="collapse collapsed-documentation d-column p-3 " id="#(idList_"collapse")#">
+                <div>
+                    <p class="description mx-2 mt-3">#( $REPLACE(map.Description, $CHAR(13,10), "<br>" ))#</p>
+                    <a type="button" class="btn btn-outline-dark" href="/csp/#(nameSpace)#/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=#(map.Forward)#"> Go to Documentation #(map.Forward)#</a>
+                </div>
+            </div>
+        >
     }
-   Quit $$$OK
+    Quit $$$OK
 }
 
 ClassMethod DrawUrlRoutes(pRestDocumentation As RestDocumentation.Model.RestDocumentation) As %Status
@@ -66,8 +102,11 @@ ClassMethod DrawUrlRoutes(pRestDocumentation As RestDocumentation.Model.RestDocu
     Quit:( countRoutes = 0 ) $$$OK
 
     &html<
-    <h4> Routes :</h4>
-    <ul class="p-0">>
+        <hr>
+        <h4>Routes:</h4>
+        <ul class="p-0">
+    >
+
     For i=1:1:countRoutes{
         Set route = pRestDocumentation.Routes.GetAt(i)
         
@@ -114,10 +153,10 @@ ClassMethod DrawUrlRoutes(pRestDocumentation As RestDocumentation.Model.RestDocu
             &html<
                 <div class="mt-3 mb-4">
                     <h4 class="text-wrap">#(route.Call)#</h4>
-                    <h5 class="lighter text-wrap">#(route.Url)# </h5>
+                    <h5 class="lighter text-wrap m-0">#(route.Url)# </h5>
                 </div>
 
-                <p class="description mx-2">#( $REPLACE(route.Description, $CHAR(13,10), "<br>" ))#</p>
+                <p class="description mx-2 mt-3">#( $REPLACE(route.Description, $CHAR(13,10), "<br>" ))#</p>
 
             >
             
@@ -154,7 +193,6 @@ ClassMethod DrawUrlRoutes(pRestDocumentation As RestDocumentation.Model.RestDocu
                 Set responseBody = ..interpretBody(route.ResponseBody)
                 &html<
                     <p class="mt-4 h6">Response:</p>
-
                     <code class="mt-1">
                         <pre><script language="javascript"> formatJson( #(responseBody)# ) </script></pre>
                     </code>

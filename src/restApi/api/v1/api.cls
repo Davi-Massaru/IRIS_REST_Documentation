@@ -1,5 +1,4 @@
-/// Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-/// sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+/// Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 Class restApi.v1.api Extends %CSP.REST
 {
 
