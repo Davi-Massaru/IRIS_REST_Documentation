@@ -13,7 +13,7 @@ Class restApi.v2.api Extends %CSP.REST
 /// @ParameterQuery(color,blue|green|red)
 /// @ParameterQuery(name,string)
 /// @ParameterQuery(company,string)
-ClassMethod MethodGET() As %Status
+ClassMethod GETsample() As %Status
 {
     Return $$$ok
 }
@@ -24,12 +24,12 @@ ClassMethod MethodGET() As %Status
 /// @ParameterQuery(color,blue|green|red)
 /// @ParameterQuery(name,string)
 /// @ParameterQuery(company,string)
-ClassMethod MehtodHEad() As %Status
+ClassMethod HEADsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod POST() As %Status
+ClassMethod POSTsample() As %Status
 {
     Return $$$ok
 }
@@ -38,32 +38,32 @@ ClassMethod POST() As %Status
 /// @RequestBody(restApi.Model.Company)
 /// @ContentType(application/json)
 /// @ParameterQuery(company,string)
-ClassMethod PUT() As %Status
+ClassMethod PUTsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod DELETE() As %Status
+ClassMethod DELETEsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod CONNECT() As %Status
+ClassMethod CONNECTsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod OPTIONS() As %Status
+ClassMethod OPTIONSsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod TRACE() As %Status
+ClassMethod TRACEsample() As %Status
 {
     Return $$$ok
 }
 
-ClassMethod PATCH() As %Status
+ClassMethod PATCHsample() As %Status
 {
     Return $$$ok
 }
@@ -71,15 +71,15 @@ ClassMethod PATCH() As %Status
 XData UrlMap
 {
 <Routes>
-<Route  Url="/ping/Test/url" Method="GET" Call="MethodGET"  Cors="true"   />
-<Route  Url="/ping/Test/url" Method="PUT" Call="PUT"     />
-<Route  Url="/ping/Test/url" Method="HEAD" Call="MehtodHEad"    />
-<Route  Url="/ping/Test/url" Method="POST" Call="POST"    />
-<Route  Url="/ping/Test/url" Method="TRACE" Call="TRACE"   />
-<Route  Url="/ping/Test/url" Method="PATCH" Call="PATCH"   />
-<Route  Url="/ping/Test/url" Method="DELETE" Call="DELETE"  />
-<Route  Url="/ping/Test/url" Method="OPTIONS" Call="OPTIONS" />
-<Route  Url="/ping/Test/url" Method="CONNECT" Call="CONNECT" /> 
+<Route  Url="/ping/Test/url" Method="GET" Call="GETsample"  Cors="true"   />
+<Route  Url="/ping/Test/url" Method="PUT" Call="PUTsample"     />
+<Route  Url="/ping/Test/url" Method="HEAD" Call="HEADsample"    />
+<Route  Url="/ping/Test/url" Method="POST" Call="POSTsample"    />
+<Route  Url="/ping/Test/url" Method="TRACE" Call="TRACEsample"   />
+<Route  Url="/ping/Test/url" Method="PATCH" Call="PATCHsample"   />
+<Route  Url="/ping/Test/url" Method="DELETE" Call="DELETEsample"  />
+<Route  Url="/ping/Test/url" Method="OPTIONS" Call="OPTIONSsample" />
+<Route  Url="/ping/Test/url" Method="CONNECT" Call="CONNECTsample" /> 
 </Routes>
 }
 
