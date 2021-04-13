@@ -35,6 +35,7 @@ Note:
 - ${host} : the host that your server
 - ${port} : the port of your application, is the same one where you access the Management portal
 
+<img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/show.gif?raw=true"></img>
 
 If necessary, login with the _SYSTEM or another user.
 And now you have a UI visualization of the rest class Api.dispatch with its routes and Maps generated described in the XData UrlMap
@@ -52,6 +53,27 @@ XData UrlMap
 }
 ```
 
-<img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/show.gif?raw=true"></img>
+Compare to
 
+<img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/ui.png?raw=true"></img>
+
+## Document your Rest API
+
+ROUTES:
+
+Sumary
+ - Url : It is provided by the XData UrlMap < Route __Url = ""__  >  described in the class
+ - Method :  It is provided by the XData UrlMap < Route __Method = ""__  >  described in the class
+ - Call :  It is provided by XData UrlMap < Route __Call = ""__  > described in the class
+ - Cors : It is provided by XData UrlMap < Route __Cors = ""__  > described in the class
+ - Description : It is provided by __Method described__ in the __classmethod__ called by < Route __Call=""__ >  
+ - ResponseBody : It is provided by __Annotation @ResponseBody( )__ described in the __Method described__
+ - RequestBody :  It is provided by __Annotation @RequestBody( )__ described in the __Method described__
+ - ContentType :  It is provided by __Annotation @ContentType( )__ described in the __Method described__
+ - ParameterQuery (LIST) :  It is provided by __Annotation @ParameterQuery( )__ described in the __Method described__ you can enter several @ParameterQuery( )
+
+Maps: 
+ - Prefix : It is provided by the XData UrlMap < Map __Prefix = ""__  >  described in the class;
+ - Forward : It is provided by the XData UrlMap < Map __Forward = ""__  >  described in the class;
+ - Description : It is provided by the __Description class__  described in the class caled in Forward;
 
