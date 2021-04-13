@@ -23,7 +23,8 @@ ClassMethod Ping() As %Status
     Return $$$OK
 }
 
-/// @ResponseBody(restApi.Model.Sample)
+///  Return the %request.Content.Read()
+/// @ResponseBody(restApi.Model.Company)
 /// @RequestBody(restApi.Model.Company)
 ClassMethod PingPost() As %Status
 {
