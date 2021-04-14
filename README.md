@@ -212,7 +212,6 @@ Class restApi.Model.Children Extends %RegisteredObject
     Property Age As %Integer;
     Property school As %String;
 }
-
 ```
 
 And reference them in the properties of your main class:
@@ -227,7 +226,6 @@ Class restApi.Model.Sample Extends %RegisteredObject
     Property Children As list Of restApi.Model.Children;
     Property Company As restApi.Model.Company;
 }
-
 ```
 Define this class at @ResponseBody() and this is the result:
 
