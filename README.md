@@ -153,15 +153,10 @@ Build a representative class as described below.
 ```
 Class restApi.Model.Company Extends %RegisteredObject
 {
-
 Property Name As %String;
-
 Property Description As %String;
-
 Property QuantityEmployees As %Integer;
-
 Property IsMultinational As %Boolean;
-
 }
 ```
 When you create a @ResponseBody or @RequestBody in your annotation, input the class reference like a @RequestBody(rest Api.Model.Company) and this JSON representation will appear in the documentation's __Body:__ section.
