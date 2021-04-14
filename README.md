@@ -1,7 +1,7 @@
 ## REST Documentation [ IRIS ]
-This project is a developer tool to how you can be visually analyzing the flow of your REST API endpoints, based on a ObjectScript class reference;
+This project is a developement tool that aims to assist you to visually analyzing the flow of your REST API endpoints, based on a ObjectScript class reference;
 
-With it is possible to add annotations to document your API to add more information when generating the documentation.
+With it is possible to add annotations that document your API to add more information when generating the documentation.
 
 ## Prerequisites
 
@@ -28,11 +28,11 @@ $ docker-compose up -d
 ```
 ## Getting Started
 
-In tem folder src/restApi you have sample of ObjectScript RestApi,looking for restApi.dispath.cls
+In the folder src/restApi there is an example of an ObjectScript RestApi, look for restApi.dispath.cls
 
 Note: 
-- ${host} : the host that your server
-- ${port} : the port of your application, is the same one where you access the Management portal
+- ${host} : your host's server
+- ${port} : your application's port (the same one you use access the Management Portal)
 
 try to access the link 
 
@@ -40,9 +40,9 @@ try to access the link
 http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=restApi.dispath.cls
 ```
 
-If you are use the VsCode, you can access the Rest Documentation opening features of the object objectscript.conn extension;
+If you are using VsCode and have the [InterSystems ObjectScript Extension Pack](https://marketplace.visualstudio.com/items?itemName=intersystems-community.objectscript-pack) extension, access restApi.dispath.cls, click on the extension's dedicated button and select RestDocumentation.
 
-Fot it make sure that your settings.json in .vscode folder looks like this:
+For this to work, make sure that your settings.json in the .vscode folder looks like this:
 
 ```
     "objectscript.conn" :{
@@ -55,8 +55,8 @@ Fot it make sure that your settings.json in .vscode folder looks like this:
 ```
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/show.gif?raw=true"></img>
 
-If necessary, login with the _SYSTEM or another user.
-And now you have a UI visualization of the rest class Api.dispatch with its routes and Maps generated described in the XData UrlMap
+If necessary, login with the _SYSTEM or other user.
+And now you have an UI visualization of the rest class Api.dispatch with its routes and Maps generated described in the XData UrlMap
 
 ```
 XData UrlMap
@@ -91,11 +91,11 @@ ROUTES:
 Maps: 
  - Prefix : It is provided by the XData UrlMap < Map __Prefix = ""__  >  described in the class;
  - Forward : It is provided by the XData UrlMap < Map __Forward = ""__  >  described in the class;
- - Description : It is provided by the __Description class__  described in the class caled in Forward;
+ - Description : It is provided by the __Description class__  described in the class called in __Forward__;
 
 ## Annotations
 
-The Annotations are defined in the description of the method and are used to add additional information to the RestAPI documentation;
+The annotations are defined in the description of the method and are used to add additional information to the RestAPI documentation;
 
 ```
 Class restApi.api Extends %CSP.REST
@@ -128,11 +128,12 @@ Class restApi.api Extends %CSP.REST
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/DocumentationMethodSample.png?raw=true"></img>
 
-Note: no one Annotations is required
+Note: annotations are optional
 
 ### ResponseBody And RequestBody 
 
-These annotations work as %RegisteredObject interpreters, input the reference of your class as a value, and the application will try to convert them to a representative JSON structure based on the object's Properties.
+These annotations work as %RegisteredObject interpreters.
+To use them, input the reference of your class as a value and the application will try to convert them to a representative JSON structure based on the object's Properties.
 
 Sample: 
 
@@ -162,13 +163,13 @@ Property IsMultinational As %Boolean;
 
 }
 ```
-When you create an Annotations @ResponseBody or @RequestBody input the class reference like a @RequestBody(rest Api.Model.Company) and this JSON representation will appear in the __Body:__
+When you create a @ResponseBody or @RequestBody in your annotation, input the class reference like a @RequestBody(rest Api.Model.Company) and this JSON representation will appear in the documentation's __Body:__ section.
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/Body.png?raw=true"></img>
 
-For more complex structures with lists of references to other objects or objects in properties, create the %RegisteredObject object Models and define yours properties with them.
+For more complex structures with lists of references to other objects or objects in properties, create the %RegisteredObject object Models and define its properties with them.
 
-For sample:
+For example:
 
 ```
 {
@@ -228,6 +229,6 @@ Class restApi.Model.Sample Extends %RegisteredObject
 }
 
 ```
-Define this class at @ResponseBody() and and this is the result :
+Define this class at @ResponseBody() and this is the result:
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/response.png?raw=true"></img>
