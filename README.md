@@ -70,7 +70,7 @@ Sumary
  - ResponseBody : It is provided by __Annotation @ResponseBody( )__ described in the __Method description__
  - RequestBody :  It is provided by __Annotation @RequestBody( )__ described in the __Method description__
  - ContentType :  It is provided by __Annotation @ContentType( )__ described in the __Method description__
- - ParameterQuery (LIST) :  It is provided by __Annotation @ParameterQuery( )__ described in the __Method description__ you can enter several @ParameterQuery( )
+ - ParameterQuery < LIST > :  It is provided by __Annotation @ParameterQuery( )__ described in the __Method description__ you can enter several @ParameterQuery( )
 
 Maps: 
  - Prefix : It is provided by the XData UrlMap < Map __Prefix = ""__  >  described in the class;
@@ -128,7 +128,6 @@ If you want to represent a JSON with the structure below:
     "Name": "String",
     "QuantityEmployees": 544494327
 }
-
 ```
 
 Build a representative class as described below.
@@ -146,8 +145,73 @@ Property QuantityEmployees As %Integer;
 Property IsMultinational As %Boolean;
 
 }
-
 ```
 When you create an Annotations @ResponseBody or @RequestBody input the class reference like a @RequestBody(rest Api.Model.Company) and this JSON representation will appear in the __Body:__
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/Body.png?raw=true"></img>
+
+For more complex structures with lists of references to other objects or objects in properties, create the %RegisteredObject object Models and define yours properties with them.
+
+For sample:
+
+```
+{
+    "Address": "String",
+    "Age": 880052597,
+    "Children": [
+        {
+            "Age": 784503894,
+            "Name": "String",
+            "school": "String"
+        }
+    ],
+    "Company": {
+        "Description": "String",
+        "IsMultinational": false,
+        "Name": "String"
+    },
+    "HasChildren": true,
+    "Name": "String"
+}
+```
+
+create %RegisteredObject for children and Company;
+
+restApi.Model.Company:
+```
+Class restApi.Model.Company Extends %RegisteredObject
+{
+    Property Name As %String;
+    Property Description As %String;
+    Property IsMultinational As %Boolean;
+}
+```
+
+restApi.Model.Children: 
+```
+Class restApi.Model.Children Extends %RegisteredObject
+{
+    Property Name As %String;
+    Property Age As %Integer;
+    Property school As %String;
+}
+
+```
+
+And reference them in the properties of your main class:
+
+```
+Class restApi.Model.Sample Extends %RegisteredObject
+{
+    Property Name As %String;
+    Property Address As %Library.String;
+    Property Age As %Integer;
+    Property HasChildren As %Boolean;
+    Property Children As list Of restApi.Model.Children;
+    Property Company As restApi.Model.Company;
+}
+
+```
+Define this class at @ResponseBody() and and this is the result :
+
+<img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/response.png?raw=true"></img>
