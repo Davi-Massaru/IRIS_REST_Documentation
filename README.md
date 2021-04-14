@@ -40,6 +40,19 @@ try to access the link
 http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=restApi.dispath.cls
 ```
 
+If you are use the VsCode, you can access the Rest Documentation opening features of the object objectscript.conn extension;
+
+Fot it make sure that your settings.json in .vscode folder looks like this:
+
+```
+    "objectscript.conn" :{
+      "ns": "USER",
+      "username": "_SYSTEM",
+      "password": "SYS",
+      "links": {
+        "RestDocumentation": "http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=${classname}"
+      }
+```
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/show.gif?raw=true"></img>
 
 If necessary, login with the _SYSTEM or another user.
