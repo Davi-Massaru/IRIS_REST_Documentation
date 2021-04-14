@@ -60,8 +60,6 @@ Compare to
 ## Document your Rest API
 
 ROUTES:
-
-Sumary
  - Url : It is provided by the XData UrlMap < Route __Url = ""__  >  described in the class
  - Method :  It is provided by the XData UrlMap < Route __Method = ""__  >  described in the class
  - Call :  It is provided by XData UrlMap < Route __Call = ""__  > described in the class
