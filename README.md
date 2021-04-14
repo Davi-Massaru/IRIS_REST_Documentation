@@ -112,5 +112,42 @@ Class restApi.api Extends %CSP.REST
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/DocumentationMethodSample.png?raw=true"></img>
 
+Note: no one Annotations is required
 
-#### @ResponseBody 
+### ResponseBody And RequestBody 
+
+These annotations work as %RegisteredObject interpreters, input the reference of your class as a value, and the application will try to convert them to a representative JSON structure based on the object's Properties.
+
+Sample: 
+
+If you want to represent a JSON with the structure below:
+```
+{
+    "Description": "String",
+    "IsMultinational": true,
+    "Name": "String",
+    "QuantityEmployees": 544494327
+}
+
+```
+
+Build a representative class as described below.
+
+```
+Class restApi.Model.Company Extends %RegisteredObject
+{
+
+Property Name As %String;
+
+Property Description As %String;
+
+Property QuantityEmployees As %Integer;
+
+Property IsMultinational As %Boolean;
+
+}
+
+```
+When you create an Annotations @ResponseBody or @RequestBody input the class reference like a @RequestBody(rest Api.Model.Company) and this JSON representation will appear in the __Body:__
+
+<img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/Body.png?raw=true"></img>
