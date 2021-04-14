@@ -29,11 +29,16 @@ $ docker-compose up -d
 ## Getting Started
 
 In tem folder src/restApi you have sample of ObjectScript RestApi,looking for restApi.dispath.cls
-try to access the link http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=restApi.dispath.cls
 
 Note: 
 - ${host} : the host that your server
 - ${port} : the port of your application, is the same one where you access the Management portal
+
+try to access the link 
+
+```
+http://${host}:${port}/csp/${namespace}/RestDocumentation.View.DocumentationRestView.cls?CLASSNAME=restApi.dispath.cls
+```
 
 <img src="https://github.com/Davi-Massaru/IRIS_REST_Documentation/blob/main/READMEFILES/show.gif?raw=true"></img>
 
