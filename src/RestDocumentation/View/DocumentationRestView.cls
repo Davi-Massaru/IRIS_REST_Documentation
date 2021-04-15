@@ -28,12 +28,14 @@ ClassMethod OnPage() As %Status
             Do:(classname '= "") ..DrawUrlMaps(restDocumentation)
             
            } catch(sc){
-            Write "<ul> this reference class has problems"
-            WRITE "<li> error code: ",sc.Code,"</li>"
-            WRITE "<li> error location: ",sc.Location,"</li>"
-            WRITE "<li> errorText: ", $System.Status.GetErrorText(sc,1),"</li>"
-            WRITE "<li> GetOneStatusText: ", $System.Status.GetOneStatusText(sc,1),"</li>"
-            WRITE "</ul>"
+            Write "<p> this reference class has problems </p>"
+            WRITE:(sc.Name '= "") "<li> error Name: ",sc.Name," </li>"
+            WRITE:(sc.Code '= "") "<li> error code: ",sc.Code," </li>"
+            WRITE:(sc.Data '= "") "<li> error data: ",sc.Data," </li>"
+            WRITE:(sc.Location '= "") "<li> error location: ",sc.Location,"</li>"
+            WRITE:( $System.Status.GetErrorText(sc,1) '= "") "<li> errorText: ", $System.Status.GetErrorText(sc,1),"</li>"
+            WRITE:( $System.Status.GetOneStatusText(sc,1) '= "") "<li> GetOneStatusText: ", $System.Status.GetOneStatusText(sc,1),"</li>"
+            
         }
     &html<
         </section>

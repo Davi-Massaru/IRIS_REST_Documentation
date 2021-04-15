@@ -3,7 +3,8 @@ Class RestDocumentation.Service.DocumentationService Extends %RegisteredObject
 
 ClassMethod GetDocumentation(pNameClass As %String) As RestDocumentation.Model.RestDocumentation
 {
-    Quit:'(..IsExtentionOfREST(pNameClass))
+    Do ..IsExtentionOfREST(pNameClass)
+
     Set RestDocumentation = ##class(RestDocumentation.Model.RestDocumentation).%New()
     
     Set RestDocumentation.Maps = ..GetListMapXData(pNameClass)
@@ -14,8 +15,8 @@ ClassMethod GetDocumentation(pNameClass As %String) As RestDocumentation.Model.R
 
 ClassMethod GetListMapXData(pNameClass As %String) As %ListOfObjects
 {
-    Quit:'(..IsExtentionOfREST(pNameClass))
-
+    Do ..IsExtentionOfREST(pNameClass)
+    
     Set tSC = ..GetRouteResult(pNameClass,"Map",.tResults)
     Quit:$$$ISERR(tSC)
 
@@ -39,7 +40,7 @@ ClassMethod GetListMapXData(pNameClass As %String) As %ListOfObjects
 
 ClassMethod GetListRoutesXData(pNameClass As %String) As %ListOfObjects
 {
-    Quit:'(..IsExtentionOfREST(pNameClass))
+    Do ..IsExtentionOfREST(pNameClass)
 
     Set tSC = ..GetRouteResult(pNameClass,"Route",.tResults)
     Quit:$$$ISERR(tSC)
@@ -136,10 +137,9 @@ ClassMethod ConvertXmlResultAttributesToObjectList(pResults As %ListOfObjects(CL
 
 ClassMethod IsExtentionOfREST(pNameClass As %String) As %Boolean
 {
- 	Set classDefinition = ##class(%Dictionary.ClassDefinition).%OpenId(pNameClass)
-    Set superclasses  = $LISTFROMSTRING(classDefinition.Super,",")
-    Set isREST = ($LISTFIND(superclasses,"%CSP.REST") > 0 )
-    Return isREST
+    Set isRest = $classmethod(pNameClass,"%Extends","%CSP.REST")
+    THROW:('isRest) ##class(%Exception.General).%New("Not extension of REST","500",,"this class definition is not Extension Of REST")
+    Return $$$OK
 }
 
 }
